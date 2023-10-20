@@ -10,3 +10,6 @@ export const adminRequest = axios.create({
   baseURL: API_URL,
   headers: { token: "Bearer " + accessToken },
 });
+
+export const CLOUDINARY_BASE_URL =
+  "https://res.cloudinary.com/di5i4j5uv/image/upload/c_fill,h_40,f_auto,q_auto/";

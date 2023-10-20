@@ -1,3 +1,5 @@
+import { CLOUDINARY_BASE_URL } from "./utils";
+
 export const userColumns = [
   { field: "id", headerName: "ID", width: 250 },
   {
@@ -37,6 +39,16 @@ export const productColumns = [
     width: 150,
   },
   {
+    field: "image",
+    headerName: "Image",
+    width: 150,
+    renderCell: (params) => (
+      <img
+        src={CLOUDINARY_BASE_URL + "products/" + params.row.image_id + ".jpg"}
+      />
+    ),
+  },
+  {
     field: "title",
     headerName: "Title",
     width: 150,
@@ -47,7 +59,7 @@ export const productColumns = [
     width: 150,
   },
   {
-    field: "cloudinary_image_id",
+    field: "image_id",
     headerName: "Image ID",
     width: 150,
   },

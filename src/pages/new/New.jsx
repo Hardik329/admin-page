@@ -10,8 +10,25 @@ import { v4 as uuidv4 } from "uuid";
 
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState("");
+
+  console.log(file);
+
   const location = useLocation().pathname.slice(1, 6);
   const isUser = location === "users";
+
+  const handleUpload = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      const reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onloadend = (e) => {
+        if (!reader.error) {
+          setFile(reader.result);
+        } else {
+          console.log(reader.error);
+        }
+      };
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -58,7 +75,13 @@ const New = ({ inputs, title }) => {
       const input = Array.from(e.target.elements).filter(
         (el) => el.type === "text"
       );
-      const data = { size, color, inStock, id: uuidv4() };
+      const data = {
+        size,
+        color,
+        inStock,
+        id: uuidv4(),
+        file: file,
+      };
 
       console.log(data);
 
@@ -68,7 +91,11 @@ const New = ({ inputs, title }) => {
 
       data.categories = categories;
 
-      if (!data.cloudinary_image_id) data.cloudinary_image_id = data.id;
+      if (!data.image_id) data.image_id = data.id;
+
+      if (!data.file) data.image_id = "DEFAULT_IMAGE";
+
+      console.log(data);
 
       try {
         await adminRequest.post("products", data);
@@ -92,14 +119,7 @@ const New = ({ inputs, title }) => {
         </div>
         <div className="bottom">
           <div className="left">
-            <img
-              src={
-                file
-                  ? URL.createObjectURL(file)
-                  : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-              }
-              alt=""
-            />
+            <img src={file} alt="" />
           </div>
           <div className="right">
             <form onSubmit={(e) => handleSubmit(e)}>
@@ -110,7 +130,7 @@ const New = ({ inputs, title }) => {
                 <input
                   type="file"
                   id="file"
-                  onChange={(e) => setFile(e.target.files[0])}
+                  onChange={(e) => handleUpload(e)}
                   style={{ display: "none" }}
                 />
               </div>

@@ -54,7 +54,7 @@ export const productInputs = [
     id: 8,
     label: "Image ID",
     type: "text",
-    field: "cloudinary_image_id",
+    field: "image_id",
   },
   {
     id: 3,
