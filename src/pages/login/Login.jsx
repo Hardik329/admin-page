@@ -12,18 +12,18 @@ const Login = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    console.log({ username, password });
+    // console.log({ username, password });
 
     try {
-      const res = await axios.post(
-        API_URL + "auth/login",
-        { username, password }
-      );
+      const res = await axios.post(API_URL + "auth/login", {
+        username,
+        password,
+      });
       const user = JSON.stringify(res.data);
       localStorage.setItem("user", user);
-      navigate("../",{replace:true});
+      navigate("../", { replace: true });
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
     // const json = await user.json();
   };

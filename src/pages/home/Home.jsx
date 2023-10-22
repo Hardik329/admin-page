@@ -9,20 +9,18 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 const Home = () => {
-
   const navigate = useNavigate();
 
   const user = localStorage.getItem("user");
-  
-  console.log(JSON.parse(user));
-  
-  useEffect(()=>{
-    if(!user){
-      navigate("/login",{replace:true});
-      console.log("here");
+
+  // console.log(JSON.parse(user));
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/login", { replace: true });
+      // console.log("here");
     }
-    
-  },[user]);
+  }, [user]);
 
   return (
     <div className="home">

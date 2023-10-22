@@ -11,17 +11,17 @@ import { adminRequest, API_URL } from "../../utils";
 const Datatable = ({ isUser }) => {
   const [data, setData] = useState();
 
-  console.log(isUser);
+  // console.log(isUser);
 
   const handleDelete = async (id) => {
     setData(data.filter((item) => item.id !== id));
     try {
-      await adminRequest.delete((isUser? "users/" : "products/") + id);
-      console.log("Deleted successfully");
+      await adminRequest.delete((isUser ? "users/" : "products/") + id);
+      // console.log("Deleted successfully");
     } catch (error) {
       alert(error);
     }
-    console.log(id);
+    // console.log(id);
   };
 
   const user = JSON.parse(localStorage.getItem("user"));
@@ -32,7 +32,7 @@ const Datatable = ({ isUser }) => {
         headers: { token: "Bearer " + user?.accessToken },
       });
       const users = await res.data;
-      console.log(users);
+      // console.log(users);
       setData(users);
     };
     getUsers();

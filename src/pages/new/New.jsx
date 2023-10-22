@@ -11,7 +11,7 @@ import { v4 as uuidv4 } from "uuid";
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState("");
 
-  console.log(file);
+  // console.log(file);
 
   const location = useLocation().pathname.slice(1, 6);
   const isUser = location === "users";
@@ -24,7 +24,7 @@ const New = ({ inputs, title }) => {
         if (!reader.error) {
           setFile(reader.result);
         } else {
-          console.log(reader.error);
+          // console.log(reader.error);
         }
       };
     }
@@ -44,17 +44,17 @@ const New = ({ inputs, title }) => {
         data[el.name] = el.value;
       });
 
-      console.log(data);
+      // console.log(data);
 
       try {
         const res = await adminRequest.post("auth/register", data);
-        console.log(res);
-        console.log("User added successfully");
+        // console.log(res);
+        // console.log("User added successfully");
       } catch (err) {
         alert(err);
       }
 
-      console.log(data);
+      // console.log(data);
     } else {
       const categories = e.target.categories.value.split(" ");
 
@@ -83,7 +83,7 @@ const New = ({ inputs, title }) => {
         file: file,
       };
 
-      console.log(data);
+      // console.log(data);
 
       input.forEach((el) => {
         data[el.name] = el.value;
@@ -95,17 +95,17 @@ const New = ({ inputs, title }) => {
 
       if (!data.file) data.image_id = "DEFAULT_IMAGE";
 
-      console.log(data);
+      // console.log(data);
 
       try {
         await adminRequest.post("products", data);
-        console.log("Product added successfully");
+        // console.log("Product added successfully");
 
         window.location.reload();
       } catch (error) {
         alert(error);
       }
-      // console.log(e.target.file.value);
+      // // console.log(e.target.file.value);
     }
   };
 
